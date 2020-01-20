@@ -1,0 +1,34 @@
+<div>
+    <!-- form card register -->
+    <div>
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="inputName">Name</label><br>
+          <input type="text" formControlName="name">
+          <!-- error -->
+          <div *ngIf="submitted && myForm.name.errors?.required">
+            Name is required.
+          </div>
+        </div>
+
+        <div>
+          <label for="inputPassword3">Role</label><br>
+          <select (change)="updateProfile($event.target.value)"
+            formControlName="role">
+            <option value="">Choose...</option>
+            <option *ngFor="let userProfile of UserProfile" value="{{userProfile}}">{{userProfile}}
+            </option>
+          </select>
+          <!-- error -->
+          <div *ngIf="submitted && myForm.role.errors?.required">
+            Choose role.
+          </div>
+        </div>
+
+        <div>
+          <button type="submit">Register</button>
+        </div>
+      </form>
+
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<div>
+  <p *ngIf="Role.length <= 0">There is no role added yet!</p>
+  <table *ngIf="Role.length > 0">
+    <thead >
+      <tr>
+        <th scope="col">Role ID</th>
+        <th scope="col">role</th>
+        <th scope="col center">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of Role; let i = index">
+        <th scope="row">{{role._id}}</th>
+        <td>{{role.name}}</td>
+        <td>
+          <span [routerLink]="['/edit-role/', role._id]">
+            <button type="button" >Edit</button>
+          </span>
+          <span (click)="removeRole(role, i)">
+            <button type="button">Delete</button>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

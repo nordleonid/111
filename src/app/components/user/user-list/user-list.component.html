@@ -1,0 +1,31 @@
+<div>
+  <!-- No data message -->
+  <p *ngIf="User.length <= 0">There is no user added yet!</p>
+
+  <!-- User list -->
+  <table *ngIf="User.length > 0">
+    <thead>
+      <tr>
+        <th scope="col">User ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">role</th>
+        <th scope="col center">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of User; let i = index">
+        <th scope="row">{{user._id}}</th>
+        <td>{{user.name}}</td>
+        <td>{{user.role}}</td>
+        <td>
+          <span [routerLink]="['/edit-user/', user._id]">
+            <button type="button" >Edit</button>
+          </span>
+          <span (click)="removeUser(user, i)">
+            <button type="button">Delete</button>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
