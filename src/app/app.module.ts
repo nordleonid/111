@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -31,11 +32,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
     RoleEditComponent
   ],
   imports: [
+    CommonModule,   
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgSelectModule
+    NgSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

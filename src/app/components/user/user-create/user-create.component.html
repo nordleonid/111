@@ -13,13 +13,18 @@
 
         <div>
           <label>Role</label><br>
-          <ng-select [items]="cities"
-            bindLabel="name"
-            placeholder="Select role"
-            [(ngModel)]="selectedCity">
-          </ng-select>
+          <ng-select
+              [items]="Role"
+              bindLabel="name"
+              bindValue="id"
+              placeholder="Select role"
+              formControlName="role"
+          >
+         <!-- [ngModelOptions]="{standalone:true}" -->
+          </ng-select
+          >
           <!-- error -->
-          <div *ngIf="submitted && myForm.role.errors?.required">
+          <div *ngIf="submitted && myForm.selectedRole.errors?.required">
             Choose role.
           </div>
         </div>

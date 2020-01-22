@@ -16,6 +16,8 @@ export class UserCreateComponent implements OnInit {
   submitted = false;
   userForm: FormGroup;
   Role:any = [];
+
+  selectedRole: any;
   
   constructor(
     public fb: FormBuilder,
@@ -27,7 +29,7 @@ export class UserCreateComponent implements OnInit {
     this.getCreate();
   };
 
-  ngOnInit() { }
+  ngOnInit() {}
 
 
   // get role table from server 
@@ -37,29 +39,14 @@ export class UserCreateComponent implements OnInit {
     })    
   }
   
-  cities = [
-    {id: 1, name: 'Vilnius'},
-    {id: 2, name: 'Kaunas'},
-    {id: 3, name: 'Pavilnys', disabled: true},
-    {id: 4, name: 'Pabradė'},
-    {id: 5, name: 'Klaipėda'}
-  ];
-  selectedCity: any;
+  
 
   mainForm() {
     this.userForm = this.fb.group({
-      name: ['', [Validators.required]]
-      //role: ['', [Validators.required]]
+      name: ['', [Validators.required]],
+      role: [this.selectedRole]
     })
   }
-
-  // // Choose role with select dropdown
-  // updateProfile(e){
-  //   this.userForm.get('role').setValue(e, {
-  //     onlySelf: true
-  //   })
-  // }
-
 
   // Getter to access form control
   get myForm(){
@@ -68,8 +55,8 @@ export class UserCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
     console.log(this.userForm.value);
+    this.submitted = true;
     if (!this.userForm.valid) {
       return false;
     } else {

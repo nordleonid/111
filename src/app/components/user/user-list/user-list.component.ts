@@ -24,13 +24,16 @@ export class UserListComponent implements OnInit {
   }
 
   removeUser(user, index) {
-    console.log("delete")
+    console.log("delete", user.id);
     if(window.confirm('Are you sure?')) {
-        this.apiService.deleteUser(user.id).subscribe((data) => {
-          this.User.splice(index, 1);
-        }
-      )    
+
+      let idToDelete = user.id;
+    this.User.forEach((el, i) => {
+      if (el.id == idToDelete) this.User.splice(i, 1)
+    })
+      this.apiService.deleteUser(user.id).subscribe((data) => {
+        this.User.splice(index, 1);
+      })
     }
   }
-
 }

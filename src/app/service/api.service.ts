@@ -14,20 +14,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // Create
-  createUser(data): Observable<any> {
-    let url = `${this.baseUri}/user/create`;
-    return this.http.post(url, data)
-      .pipe(
-        catchError(this.errorMgmt)
-      )
-  }
-
-  // Create
-  getRoles() {
-    console.log("get create!!!")
-    return this.http.get(`${this.baseUri}/user/roles`);
-  }
+  
 
   // Get all users
   getUsers() {
@@ -44,6 +31,24 @@ export class ApiService {
       catchError(this.errorMgmt)
     )
   }
+
+
+  // Create
+  createUser(data): Observable<any> {
+    let url = `${this.baseUri}/user/create`;
+    return this.http.post(url, data)
+      .pipe(
+        catchError(this.errorMgmt)
+      )
+  }
+
+  // Create
+  getRoles() {
+    //console.log("get create!!!")
+    return this.http.get(`${this.baseUri}/user/roles`);
+  }
+
+  
 
   // Update user
   updateUser(id, data): Observable<any> {
