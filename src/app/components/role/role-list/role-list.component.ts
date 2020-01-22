@@ -11,25 +11,26 @@ export class RoleListComponent implements OnInit {
   
   Role:any = [];
 
-  constructor(private apiService: ApiService) { 
-    this.readRole();
-  }
+  // constructor(private apiService: ApiService) { 
+  //   this.readRole();
+  // }
 
   ngOnInit() {}
 
-  readRole(){
-    this.apiService.getRoles().subscribe((data) => {
-     this.Role = data;
-    })    
-  }
+  // readRole(){
+  //   this.apiService.getRoles().subscribe((data) => {
+  //    this.Role = data;
+  //   })    
+  // }
 
-  removeRole(role, index) {
-    if(window.confirm('Are you sure?')) {
-        this.apiService.deleteRole(role._id).subscribe((data) => {
-          this.Role.splice(index, 1);
-        }
-      )    
-    }
-  }
+  // removeRole(role, index) {
+  //   console.log()
+  //   if(window.confirm('Are you sure?')) {
+  //       this.apiService.deleteRole(role._id).subscribe((data) => {
+  //         this.Role.splice(index, 1);
+  //       }
+  //     )    
+  //   }
+  // }
 
 }

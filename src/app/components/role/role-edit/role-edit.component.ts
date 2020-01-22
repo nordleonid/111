@@ -62,22 +62,22 @@ export class RoleEditComponent implements OnInit {
     })
   }
 
-  onSubmit() {
-    this.submitted = true;
-    if (!this.editForm.valid) {
-      return false;
-    } else {
-      if (window.confirm('Are you sure?')) {
-        let id = this.actRoute.snapshot.paramMap.get('id');
-        this.apiService.updateRole(id, this.editForm.value)
-          .subscribe(res => {
-            this.router.navigateByUrl('/roles-list');
-            console.log('Content updated successfully!')
-          }, (error) => {
-            console.log(error)
-          })
-      }
-    }
-  }
+  // onSubmit() {
+  //   this.submitted = true;
+  //   if (!this.editForm.valid) {
+  //     return false;
+  //   } else {
+  //     if (window.confirm('Are you sure?')) {
+  //       let id = this.actRoute.snapshot.paramMap.get('id');
+  //       this.apiService.updateRole(id, this.editForm.value)
+  //         .subscribe(res => {
+  //           this.router.navigateByUrl('/roles-list');
+  //           console.log('Content updated successfully!')
+  //         }, (error) => {
+  //           console.log(error)
+  //         })
+  //     }
+  //   }
+  // }
 
 }

@@ -12,13 +12,12 @@
         </div>
 
         <div>
-          <label for="inputPassword3">Role</label><br>
-          <select (change)="updateProfile($event.target.value)"
-            formControlName="role">
-            <option value="">Choose...</option>
-            <option *ngFor="let userProfile of UserProfile" value="{{userProfile}}">{{userProfile}}
-            </option>
-          </select>
+          <label>Role</label><br>
+          <ng-select [items]="cities"
+            bindLabel="name"
+            placeholder="Select role"
+            [(ngModel)]="selectedCity">
+          </ng-select>
           <!-- error -->
           <div *ngIf="submitted && myForm.role.errors?.required">
             Choose role.

@@ -17,6 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ApiService } from './service/api.service';
 
+import { FormsModule} from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,8 @@ import { ApiService } from './service/api.service';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgSelectModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

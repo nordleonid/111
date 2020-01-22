@@ -4,7 +4,7 @@ const jsonParser = express.json();
 const pool = require("../../module/db-config");
 
 
-router.get('/list/', (req, res) => {
+router.get('/', (req, res) => {
   pool.query("SELECT * FROM access", (err, data) => {
     if(err) return console.log(err);
     res.send({
@@ -13,7 +13,7 @@ router.get('/list/', (req, res) => {
   });
 });
 
-router.get("/update/:id", function(req, res){
+router.get("/:id", function(req, res){
     const id = req.params.id;
     pool.query("SELECT * FROM access WHERE id=?", [id], (err, data) => {
     //console.log(id);
