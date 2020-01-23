@@ -15,7 +15,9 @@ export class UserListComponent implements OnInit {
     this.readUser();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   readUser(){
     this.apiService.getUsers().subscribe((data) => {

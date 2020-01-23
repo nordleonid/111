@@ -17,50 +17,55 @@ export class UserEditComponent implements OnInit {
   submitted = false;
   editForm: FormGroup;
   Role:any = [];
-
+  User:any = [];
   selectedRole: any;
 
   constructor(
     public fb: FormBuilder,
     private router: Router,
     private ngZone: NgZone,
+    private actRoute: ActivatedRoute,
     private apiService: ApiService
-  ) { 
-    this.mainForm();
+  ) {
     this.getCreate();
   };
 
-  ngOnInit() {}
-
-  // get role table from server 
   getCreate(){
     this.apiService.getRoles().subscribe((data) => {
       this.Role = data;
-    })
+      console.log("get create data", this.Role);
+    })    
   }
 
-
-  mainForm() {
+  ngOnInit() {
+    this.updateUser();
+    let id = this.actRoute.snapshot.paramMap.get('id');
+    this.getUser(id);
     this.editForm = this.fb.group({
       name: ['', [Validators.required]],
       role: [this.selectedRole]
     })
   }
+
   // Getter to access form control
   get myForm() {
     return this.editForm.controls;
   }
 
-  // getUser(id) {
-  //   console.log(id)
-  //   this.apiService.getUser(id).subscribe(data => {
-  //     this.editForm.setValue({
-  //       name: data['name'],
-  //       role: data['role']
-  //     });
-  //   });
-  // }
+  getUser(id) {
+    console.log("get user", id)
+    this.apiService.getUser(id).subscribe(data => {
+      this.User = data;
+      console.log("get user data", this.User)
+    });
+  }
 
+  updateUser() {
+    this.editForm = this.fb.group({
+      name: ['', [Validators.required]],
+      role: [this.selectedRole]
+    })
+  }
 
   onSubmit(id) {
     console.log("id on submit", id);

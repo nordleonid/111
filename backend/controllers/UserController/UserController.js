@@ -56,8 +56,43 @@ userRoute.route('/create').post((req, res, next) => {
     );  
 });
 
+userRoute.route('/update/:id').get((req, res) => {
+  const id = req.params.id;
+  console.log(id)
+  pool.query("SELECT u.*, a.name as role FROM users u LEFT JOIN access a ON u.access_id = a.id WHERE u.id = ?", [id], (err, data) => {
+      //console.log(data);
+      if(err) {
+        return console.log(err)
+      } else {
+        res.json(data);
+        console.log(data);
+      }
+  });
+});
+
+// userRoute.route('/update/:id').get((req, res) => {
+//   const id = req.params.id;
+//   console.log("req from front", id);
+//     pool.query("SELECT * FROM users WHERE id=?", [id], (err, userData) => {
+//       if(err) return console.log(err);
+//       pool.query("SELECT * FROM access", (err, data) => {
+
+
+//         if(err) {
+//           return console.log(err)
+//         } else {
+//           res.json(
+//             //userData[0],
+//             data
+//           );
+//           console.log("user data for edit user", userData[0]);
+//         }
+//       });
+//     });
+// });
+
 // Update user
-userRoute.route('/:id').put((req, res, next) => {
+userRoute.route('update/:id').put((req, res, next) => {
   if (!req.body) return res.sendStatus(400);
   const name = req.body.name;
   const access = parseInt(req.body.access, 10);

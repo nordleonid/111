@@ -9,7 +9,7 @@
 
            <div>
              <label for="inputName">Name</label><br>
-             <input type="text" formControlName="name">
+             <input type="text" formControlName="name" ng-repeat = "item in ctrl.items">
              <!-- <div *ngIf="submitted && myForm.name.errors?.required">
                Name is required.
              </div> -->
@@ -21,7 +21,7 @@
                 [items]="Role"
                 bindLabel="name"
                 bindValue="id"
-                placeholder="Select role"
+                placeholder="{{role}}"
                 formControlName="role"
             >
             </ng-select>

@@ -27,18 +27,21 @@ export class ApiService {
     return this.http.get(`${this.baseUri}/user/roles`);
   }
 
-  // // Get user
-  // getUser(id): Observable<any> {
-  //   console.log(id);
-  //   let url = `${this.baseUri}/user/${id}`;
-  //   return this.http.get(url, {headers: this.headers}).pipe(
-  //     map((res: Response) => {
-  //       return res || {}
-  //     }),
-  //     catchError(this.errorMgmt)
-  //   )
-  // }
+  // Get user
+  getUser(id): Observable<any> {
+    console.log("get user", );
+    let url = `${this.baseUri}/user/update/${id}`;
+    return this.http.get(url)
+  }
 
+  // Update user
+  updateUser(id, data): Observable<any> {
+    console.log("id-update", id);
+    let url = `${this.baseUri}/user/update/${id}`;
+    return this.http.put(url, data, { headers: this.headers }).pipe(
+      catchError(this.errorMgmt)
+    )
+  }
 
   // Create
   createUser(data): Observable<any> {
@@ -53,14 +56,7 @@ export class ApiService {
 
   
 
-  // Update user
-  updateUser(id, data): Observable<any> {
-    console.log("id-update", id);
-    let url = `${this.baseUri}/user/update/${id}`;
-    return this.http.put(url, data, { headers: this.headers }).pipe(
-      catchError(this.errorMgmt)
-    )
-  }
+  
 
   // Delete user
   deleteUser(id): Observable<any> {

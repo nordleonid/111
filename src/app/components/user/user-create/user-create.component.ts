@@ -38,8 +38,6 @@ export class UserCreateComponent implements OnInit {
       this.Role = data;
     })    
   }
-  
-  
 
   mainForm() {
     this.userForm = this.fb.group({
