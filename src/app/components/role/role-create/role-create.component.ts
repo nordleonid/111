@@ -44,19 +44,19 @@ export class RoleCreateComponent implements OnInit {
     return this.roleForm.controls;
   }
 
-  onSubmit() {
-    this.submitted = true;
-    if (!this.roleForm.valid) {
-      return false;
-    } else {
-      this.apiService.createRole(this.roleForm.value).subscribe(
-        (res) => {
-          console.log('Role successfully created!')
-          this.ngZone.run(() => this.router.navigateByUrl('/users-list'))
-        }, (error) => {
-          console.log(error);
-        });
-    }
-  }
+  // onSubmit() {
+  //   this.submitted = true;
+  //   if (!this.roleForm.valid) {
+  //     return false;
+  //   } else {
+  //     this.apiService.createRole(this.roleForm.value).subscribe(
+  //       (res) => {
+  //         console.log('Role successfully created!')
+  //         this.ngZone.run(() => this.router.navigateByUrl('/users-list'))
+  //       }, (error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // }
 
 }

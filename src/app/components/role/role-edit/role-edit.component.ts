@@ -25,13 +25,13 @@ export class RoleEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.updateRole();
-    let id = this.actRoute.snapshot.paramMap.get('id');
-    this.getRole(id);
-    this.editForm = this.fb.group({
-      name: ['', [Validators.required]],
-      role: ['', [Validators.required]]
-    })
+    // this.updateRole();
+    // let id = this.actRoute.snapshot.paramMap.get('id');
+    // this.getRole(id);
+    // this.editForm = this.fb.group({
+    //   name: ['', [Validators.required]],
+    //   role: ['', [Validators.required]]
+    // })
   }
 
   // Choose options with select-dropdown
@@ -46,21 +46,21 @@ export class RoleEditComponent implements OnInit {
     return this.editForm.controls;
   }
 
-  getRole(id) {
-    this.apiService.getRole(id).subscribe(data => {
-      this.editForm.setValue({
-        name: data['name'],
-        role: data['role']
-      });
-    });
-  }
+  // getRole(id) {
+  //   this.apiService.getRole(id).subscribe(data => {
+  //     this.editForm.setValue({
+  //       name: data['name'],
+  //       role: data['role']
+  //     });
+  //   });
+  // }
 
-  updateRole() {
-    this.editForm = this.fb.group({
-      name: ['', [Validators.required]],
-      role: ['', [Validators.required]]
-    })
-  }
+  // updateRole() {
+  //   this.editForm = this.fb.group({
+  //     name: ['', [Validators.required]],
+  //     role: ['', [Validators.required]]
+  //   })
+  // }
 
   // onSubmit() {
   //   this.submitted = true;

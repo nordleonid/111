@@ -10,23 +10,25 @@
            <div>
              <label for="inputName">Name</label><br>
              <input type="text" formControlName="name">
-             <div *ngIf="submitted && myForm.name.errors?.required">
+             <!-- <div *ngIf="submitted && myForm.name.errors?.required">
                Name is required.
-             </div>
+             </div> -->
            </div>
 
            <div>
-             <label for="inputPassword3">role</label><br>
-             <select (change)="updateProfile($event.target.value)"
-               formControlName="role">
-               <option value="">Choose...</option>
-               <option *ngFor="let userProfile of UserProfile" value="{{userProfile}}">{{userProfile}}
-               </option>
-             </select>
+            <label>Role</label><br>
+            <ng-select
+                [items]="Role"
+                bindLabel="name"
+                bindValue="id"
+                placeholder="Select role"
+                formControlName="role"
+            >
+            </ng-select>
              <!-- error -->
-             <div *ngIf="submitted && myForm.role.errors?.required">
+             <!-- <div *ngIf="submitted && myForm.role.errors?.required">
                Choose role.
-             </div>
+             </div> -->
            </div>
 
            <div class="form-group">

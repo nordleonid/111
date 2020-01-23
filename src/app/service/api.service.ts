@@ -21,16 +21,23 @@ export class ApiService {
     return this.http.get(`${this.baseUri}/user/`);
   }
 
-  // Get user
-  getUser(id): Observable<any> {
-    let url = `${this.baseUri}/user/${id}`;
-    return this.http.get(url, {headers: this.headers}).pipe(
-      map((res: Response) => {
-        return res || {}
-      }),
-      catchError(this.errorMgmt)
-    )
+  // get table for create user 
+  getRoles() {
+    //console.log("get create!!!")
+    return this.http.get(`${this.baseUri}/user/roles`);
   }
+
+  // // Get user
+  // getUser(id): Observable<any> {
+  //   console.log(id);
+  //   let url = `${this.baseUri}/user/${id}`;
+  //   return this.http.get(url, {headers: this.headers}).pipe(
+  //     map((res: Response) => {
+  //       return res || {}
+  //     }),
+  //     catchError(this.errorMgmt)
+  //   )
+  // }
 
 
   // Create
@@ -42,17 +49,14 @@ export class ApiService {
       )
   }
 
-  // Create
-  getRoles() {
-    //console.log("get create!!!")
-    return this.http.get(`${this.baseUri}/user/roles`);
-  }
+
 
   
 
   // Update user
   updateUser(id, data): Observable<any> {
-    let url = `${this.baseUri}/user/${id}`;
+    console.log("id-update", id);
+    let url = `${this.baseUri}/user/update/${id}`;
     return this.http.put(url, data, { headers: this.headers }).pipe(
       catchError(this.errorMgmt)
     )
@@ -79,44 +83,6 @@ export class ApiService {
     }
     console.log(errorMessage);
     return throwError(errorMessage);
-  }
-
-  // Create
-  createRole(data): Observable<any> {
-    let url = `${this.baseUri}/role/`;
-    return this.http.post(url, data)
-      .pipe(
-        catchError(this.errorMgmt)
-      )
-  }
-
-
-  // Get role
-  getRole(id): Observable<any> {
-    let url = `${this.baseUri}/role/${id}`;
-    return this.http.get(url, {headers: this.headers}).pipe(
-      map((res: Response) => {
-        return res || {}
-      }),
-      catchError(this.errorMgmt)
-    )
-  }
-
-  // // Update user
-  // updateRole(id, data): Observable<any> {
-  //   let url = `${this.baseUri}/role/${id}`;
-  //   return this.http.put(url, data, { headers: this.headers }).pipe(
-  //     catchError(this.errorMgmt)
-  //   )
-  // }
-
-  // Delete user
-  deleteRole(id): Observable<any> {
-    console.log("delete req to back")
-    let url = `${this.baseUri}/role/${id}`;
-    return this.http.delete(url, { headers: this.headers }).pipe(
-      catchError(this.errorMgmt)
-    )
   }
 
 }

@@ -1,9 +1,11 @@
 import { User } from '../../../model/User';
-import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { ApiService } from '../../../service/api.service';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-
+import { Role } from '../../../model/Role';
+import {NgSelectModule, NgOption} from '@ng-select/ng-select';
+import {NgModule, ViewChild} from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-user-edit',
@@ -14,70 +16,65 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class UserEditComponent implements OnInit {
   submitted = false;
   editForm: FormGroup;
-  userData: User[];
-  UserProfile: User[];
+  Role:any = [];
+
+  selectedRole: any;
 
   constructor(
     public fb: FormBuilder,
-    private actRoute: ActivatedRoute,
-    private apiService: ApiService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private ngZone: NgZone,
+    private apiService: ApiService
+  ) { 
+    this.mainForm();
+    this.getCreate();
+  };
 
-  ngOnInit() {
-    this.updateUser();
-    let id = this.actRoute.snapshot.paramMap.get('id');
-    this.getUser(id);
+  ngOnInit() {}
+
+  // get role table from server 
+  getCreate(){
+    this.apiService.getRoles().subscribe((data) => {
+      this.Role = data;
+    })
+  }
+
+
+  mainForm() {
     this.editForm = this.fb.group({
       name: ['', [Validators.required]],
-      role: ['', [Validators.required]]
+      role: [this.selectedRole]
     })
   }
-
-  // Choose options with select-dropdown
-  updateProfile(e) {
-    this.editForm.get('role').setValue(e, {
-      onlySelf: true
-    })
-  }
-
   // Getter to access form control
   get myForm() {
     return this.editForm.controls;
   }
 
-  getUser(id) {
-    this.apiService.getUser(id).subscribe(data => {
-      this.editForm.setValue({
-        name: data['name'],
-        role: data['role']
-      });
-    });
-  }
+  // getUser(id) {
+  //   console.log(id)
+  //   this.apiService.getUser(id).subscribe(data => {
+  //     this.editForm.setValue({
+  //       name: data['name'],
+  //       role: data['role']
+  //     });
+  //   });
+  // }
 
-  updateUser() {
-    this.editForm = this.fb.group({
-      name: ['', [Validators.required]],
-      role: ['', [Validators.required]]
-    })
-  }
 
-  onSubmit() {
+  onSubmit(id) {
+    console.log("id on submit", id);
     this.submitted = true;
     if (!this.editForm.valid) {
       return false;
     } else {
-      if (window.confirm('Are you sure?')) {
-        let id = this.actRoute.snapshot.paramMap.get('id');
-        this.apiService.updateUser(id, this.editForm.value)
-          .subscribe(res => {
-            this.router.navigateByUrl('/users-list');
-            console.log('Content updated successfully!')
-          }, (error) => {
-            console.log(error)
-          })
-      }
+      this.apiService.updateUser(id, this.editForm.value).subscribe(
+        (res) => {
+          console.log('User successfully created!')
+          this.ngZone.run(() => this.router.navigateByUrl('/users-list'))
+        }, (error) => {
+          console.log(error);
+        });
     }
   }
-
 }

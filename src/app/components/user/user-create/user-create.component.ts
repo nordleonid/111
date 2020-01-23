@@ -51,7 +51,7 @@ export class UserCreateComponent implements OnInit {
   // Getter to access form control
   get myForm(){
     return this.userForm.controls;
-    console.log(this.userForm);
+    //console.log(this.userForm);
   }
 
   onSubmit() {
