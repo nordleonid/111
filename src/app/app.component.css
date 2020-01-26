@@ -1,3 +1,28 @@
 .menu-spacer {
   flex: 1 1 auto;
 }
+
+a {
+  text-decoration: none;
+}
+
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  background: #18202D;
+}
+
+.item {
+  width: 100px;
+  height: 35px;
+  padding: 5px;
+  color: aqua;
+  text-align: center;
+  text-decoration: none;
+}
+
+.item:hover {
+  background: azure;
+}
+

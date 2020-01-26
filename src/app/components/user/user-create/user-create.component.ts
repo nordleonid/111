@@ -31,7 +31,6 @@ export class UserCreateComponent implements OnInit {
 
   ngOnInit() {}
 
-
   // get role table from server 
   getCreate(){
     this.apiService.getRoles().subscribe((data) => {

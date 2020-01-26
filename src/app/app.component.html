@@ -1,13 +1,29 @@
-<div>
-  <nav>
-    <a routerLinkActive="active" routerLink="/roles-list">View roles</a>
-  </nav>
-  <a routerLinkActive="active" routerLink="/create-role">Add role</a>
-  <nav>
-    <a routerLinkActive="active" routerLink="/users-list">View users</a>
-  </nav>
-  <a routerLinkActive="active" routerLink="/create-user">Add user</a>
-</div>
-<br><br>
 
+<div class="header">
+  <div class="logo">
+    <label>The most beautiful App</label>
+  </div>
+  <div class="menu">
+    <div class="item">
+      <nav>
+        <a routerLinkActive="active" routerLink="/roles-list">View roles</a>
+      </nav>
+    </div>
+    <div class="item">
+      <nav>
+        <a routerLinkActive="active" routerLink="/create-role">Add role</a>
+      </nav>
+    </div>
+    <div class="item">
+      <nav>
+        <a routerLinkActive="active" routerLink="/users-list">View users</a>
+      </nav>
+    </div>
+    <div class="item">
+      <nav>
+        <a routerLinkActive="active" routerLink="/create-user">Add user</a>
+      </nav>
+    </div>
+  </div>
+</div>
 <router-outlet></router-outlet>

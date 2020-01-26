@@ -3,6 +3,8 @@ import { ApiService } from './../../../service/api.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Role } from '../../../model/Role';
+import {NgSelectModule, NgOption} from '@ng-select/ng-select';
+import {NgModule, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-role-create',
@@ -10,32 +12,27 @@ import { Role } from '../../../model/Role';
   styleUrls: ['./role-create.component.css']
 })
 
-export class RoleCreateComponent implements OnInit {  
+export class RoleCreateComponent implements OnInit {
   submitted = false;
   roleForm: FormGroup;
-  RoleProfile: Role[];
-  
+  Role:any = [];
+
+
+
   constructor(
     public fb: FormBuilder,
     private router: Router,
     private ngZone: NgZone,
     private apiService: ApiService
-  ) { 
+  ) {
     this.mainForm();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   mainForm() {
     this.roleForm = this.fb.group({
       name: ['', [Validators.required]]
-    })
-  }
-
-  // Choose role with select dropdown
-  updateProfile(e){
-    this.roleForm.get('role').setValue(e, {
-      onlySelf: true
     })
   }
 
@@ -44,19 +41,22 @@ export class RoleCreateComponent implements OnInit {
     return this.roleForm.controls;
   }
 
-  // onSubmit() {
-  //   this.submitted = true;
-  //   if (!this.roleForm.valid) {
-  //     return false;
-  //   } else {
-  //     this.apiService.createRole(this.roleForm.value).subscribe(
-  //       (res) => {
-  //         console.log('Role successfully created!')
-  //         this.ngZone.run(() => this.router.navigateByUrl('/users-list'))
-  //       }, (error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  // }
+  onSubmit() {
+    console.log(this.roleForm.value);
+    this.submitted = true;
+    if (!this.roleForm.valid) {
+      return false;
+    } else {
+      this.apiService.createRole(this.roleForm.value).subscribe(
+        (res) => {
+          console.log('Role successfully created!')
+          this.ngZone.run(() => this.router.navigateByUrl('/roles-list'))
+        }, (error) => {
+          console.log(error);
+        });
+    }
+  }
 
 }
+
+

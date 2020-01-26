@@ -10,10 +10,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let role of Role; let i = index">
-        <th scope="row">{{role._id}}</th>
+        <th scope="row">{{role.id}}</th>
         <td>{{role.name}}</td>
         <td>
-          <span [routerLink]="['/edit-role/', role._id]">
+          <span [routerLink]="['/edit-role/', role.id]">
             <button type="button" >Edit</button>
           </span>
           <span (click)="removeRole(role, i)">

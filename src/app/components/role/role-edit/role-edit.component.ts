@@ -1,9 +1,8 @@
 import { Role } from './../../../model/Role';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import {Component, OnInit, NgZone} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from './../../../service/api.service';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-role-edit',
@@ -14,31 +13,44 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class RoleEditComponent implements OnInit {
   submitted = false;
   editForm: FormGroup;
-  roleData: Role[];
-  RoleProfile: Role[];
+  Role: any = [];
+
 
   constructor(
     public fb: FormBuilder,
     private actRoute: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private ngZone: NgZone
   ) {}
 
+  getRole(id) {
+    console.log('get role', id);
+    this.apiService.getRole(id).subscribe(data => {
+      this.Role = data[0];
+      console.log('data get role', this.Role);
+      this.editForm.setValue({
+        name: this.Role['name'],
+        id: this.Role['id']
+      });
+    });
+  }
+
   ngOnInit() {
-    // this.updateRole();
-    // let id = this.actRoute.snapshot.paramMap.get('id');
-    // this.getRole(id);
-    // this.editForm = this.fb.group({
-    //   name: ['', [Validators.required]],
-    //   role: ['', [Validators.required]]
-    // })
+    this.updateRole();
+    const id = this.actRoute.snapshot.paramMap.get('id');
+    this.getRole(id);
+    this.editForm = this.fb.group({
+      id: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+    });
   }
 
   // Choose options with select-dropdown
   updateProfile(e) {
     this.editForm.get('role').setValue(e, {
       onlySelf: true
-    })
+    });
   }
 
   // Getter to access form control
@@ -46,38 +58,30 @@ export class RoleEditComponent implements OnInit {
     return this.editForm.controls;
   }
 
-  // getRole(id) {
-  //   this.apiService.getRole(id).subscribe(data => {
-  //     this.editForm.setValue({
-  //       name: data['name'],
-  //       role: data['role']
-  //     });
-  //   });
-  // }
 
-  // updateRole() {
-  //   this.editForm = this.fb.group({
-  //     name: ['', [Validators.required]],
-  //     role: ['', [Validators.required]]
-  //   })
-  // }
 
-  // onSubmit() {
-  //   this.submitted = true;
-  //   if (!this.editForm.valid) {
-  //     return false;
-  //   } else {
-  //     if (window.confirm('Are you sure?')) {
-  //       let id = this.actRoute.snapshot.paramMap.get('id');
-  //       this.apiService.updateRole(id, this.editForm.value)
-  //         .subscribe(res => {
-  //           this.router.navigateByUrl('/roles-list');
-  //           console.log('Content updated successfully!')
-  //         }, (error) => {
-  //           console.log(error)
-  //         })
-  //     }
-  //   }
-  // }
+  updateRole() {
+    this.editForm = this.fb.group({
+      id: ['', [Validators.required]],
+      name: ['', [Validators.required]]
+    });
+  }
 
+  onSubmit() {
+    this.submitted = true;
+    if (!this.editForm.valid) {
+      return false;
+    } else {
+      // if (window.confirm('Are you sure?')) {
+        const id = this.actRoute.snapshot.paramMap.get('id');
+        console.log('form data before send', this.editForm.value);
+        this.apiService.updateRole(id, this.editForm.value).subscribe(res => {
+          console.log('form data after send', this.editForm.value);
+          this.router.navigateByUrl('/roles-list');
+        }, (error) => {
+          console.log(error);
+        });
+      // }
+    }
+  }
 }

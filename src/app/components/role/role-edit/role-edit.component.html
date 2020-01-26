@@ -8,29 +8,14 @@
          <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
 
            <div>
-             <label for="inputName">Name</label>
+             <input type="hidden" formControlName="id" />
              <input type="text" formControlName="name">
-             <div *ngIf="submitted && myForm.name.errors?.required">
-               Name is required.
-             </div>
-           </div>
-
-           <div>
-             <label for="inputPassword3">role</label>
-             <select (change)="updateProfile($event.target.value)"
-               formControlName="role">
-               <option value="">Choose...</option>
-               <option *ngFor="let userProfile of RoleProfile" value="{{userProfile}}">{{userProfile}}
-               </option>
-             </select>
-             <div *ngIf="submitted && myForm.role.errors?.required">
-               Choose role.
-             </div>
            </div>
 
            <div>
              <button type="submit">Update</button>
            </div>
+
          </form>
        </div>
      </div>

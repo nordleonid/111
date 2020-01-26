@@ -32,7 +32,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     RoleEditComponent
   ],
   imports: [
-    CommonModule,   
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

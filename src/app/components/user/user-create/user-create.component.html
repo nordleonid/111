@@ -5,10 +5,6 @@
         <div>
           <label for="inputName">Name</label><br>
           <input type="text" formControlName="name">
-          <!-- error -->
-          <!-- <div *ngIf="submitted && myForm.name.errors.required">
-            Name is required.
-          </div> -->
         </div>
 
         <div>
@@ -17,14 +13,9 @@
               [items]="Role"
               bindLabel="name"
               bindValue="id"
-              placeholder="Select role"
               formControlName="role"
           >
           </ng-select>
-          <!-- error -->
-          <!-- <div *ngIf="submitted && myForm.selectedRole.errors.required">
-            Choose role.
-          </div> -->
         </div>
 
         <div>
